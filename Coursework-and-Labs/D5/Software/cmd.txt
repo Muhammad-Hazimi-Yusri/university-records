@@ -1,0 +1,14 @@
+avr-gcc -mmcu=atmega644p -DF_CPU=12000000 -Wall -Os prog.c -o prog.elf
+avr-objcopy -O ihex prog.elf prog.hex
+avrdude -c usbasp -p m644p -U flash:w:prog.hex
+
+for lcd :
+avr-gcc -mmcu=atmega644p -L../lcdlib -o prog.elf prog.c -llcd
+
+for c++(havent tried yet) :
+avr-g++ -mmcu=atmega644p -DF_CPU=12000000 -Wall -Os -o prog.elf prog.cpp
+avr-objcopy -O ihex prog.elf prog.hex
+avrdude -c usbasp -p m644p -U flash:w:prog.hex
+
+alternative :
+avrdude -p atmega644p -c usbasp -U flash:w:prog.elf:e
