@@ -2,13 +2,13 @@
 
 **Module:** ELEC2229 (formerly ELEC2222) -- Power Circuits and Transmission Lines
 **Type:** Individual Coursework + Laboratory Work
-**Academic Year:** 2022/2023, Year 1, University of Southampton
+**Academic Year:** 2022/2023, Year 2, University of Southampton
 **Deadline:** 17 March 2023, 4:00 PM
 **Assignment Weight:** 20% of total module mark
 
 ## Module Overview
 
-Comprehensive first-year module covering electromagnetic field theory, transmission line analysis, and power circuit design. The coursework focused on building equivalent circuit models for coaxial transmission lines using analytical calculations derived from Maxwell's equations and advanced circuit simulation tools. The module combined theoretical electromagnetic analysis with practical MultiSim circuit modeling, culminating in an IEEE-format technical paper demonstrating the behavior of a 32-meter coaxial transmission line at frequencies up to 700 MHz.
+Comprehensive second-year module covering electromagnetic field theory, transmission line analysis, and power circuit design. The coursework focused on building equivalent circuit models for coaxial transmission lines using analytical calculations derived from Maxwell's equations and advanced circuit simulation tools. The module combined theoretical electromagnetic analysis with practical MultiSim circuit modeling, culminating in an IEEE-format technical paper demonstrating the behavior of a 32-meter coaxial transmission line at frequencies up to 700 MHz.
 
 ## Major Coursework: Equivalent Circuit Model of Transmission Lines
 

@@ -2,12 +2,12 @@
 
 **Module:** ELEC2220 -- Control Systems and Communications Theory
 **Type:** Individual Coursework
-**Academic Year:** 2022/2023, Year 1, University of Southampton
+**Academic Year:** 2021/2023, Year 2, University of Southampton
 **Assessment:** Two coursework assignments (Control Systems and Communications Theory)
-
+.
 ## Module Overview
 
-This first-year module provided comprehensive coverage of control systems engineering and communications theory. The module combined mathematical analysis with practical problem-solving, covering classical control techniques (root locus, Nyquist stability) and modern digital communications (QAM, QPSK, BPSK modulation schemes). The coursework emphasized analytical skills, system stability analysis, and signal processing fundamentals essential for electrical and electronic engineering.
+This second-year module provided comprehensive coverage of control systems engineering and communications theory. The module combined mathematical analysis with practical problem-solving, covering classical control techniques (root locus, Nyquist stability) and modern digital communications (QAM, QPSK, BPSK modulation schemes). The coursework emphasized analytical skills, system stability analysis, and signal processing fundamentals essential for electrical and electronic engineering.
 
 ## Key Topics Covered
 
