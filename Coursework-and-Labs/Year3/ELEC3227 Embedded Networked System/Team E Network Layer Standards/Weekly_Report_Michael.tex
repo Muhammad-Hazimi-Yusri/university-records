@@ -1,0 +1,158 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{epsfig}
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{dsfont}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{titlesec}
+\usepackage{fix-cm}
+\usepackage{pxfonts}
+\usepackage[margin=2.54cm]{geometry}  % Adjust the margin value as needed
+
+% Set Times New Roman as the main font
+\setmainfont{Times New Roman}
+
+% Set single line spacing
+\linespread{1.0}
+
+% You can use nomenclature for Abbreviations if you like
+%\usepackage{nomencl} 
+%\makenomenclature
+
+
+%\topmargin=-20mm
+%\oddsidemargin=-1mm
+%\evensidemargin=-5mm
+\textwidth=170mm
+\textheight=250mm
+\hsize=170mm
+\vsize=250mm
+\headsep=5mm
+\parskip=2mm
+
+
+%% self defined shortcut commands 
+\newcommand{\eqr}[1]{Eq.~\eqref{#1}}
+\newcommand{\fref}[1]{Figure~\ref{#1}}
+\newcommand{\tref}[1]{Table~\ref{#1}}
+\newcommand{\hl}[1]{\textit{\textcolor{blue}{#1}}}
+\newcommand{\nospaceafter}[1]{%
+  #1%
+  \vspace{-\baselineskip}%
+}
+
+% Change the font size for \section and \subsection using points
+\titleformat{\section}{\fontsize{14}{16}\selectfont\bfseries}{\thesection}{1em}{}  % Adjust 16pt to your preferred size
+\titleformat{\subsection}{\fontsize{13}{10}\selectfont\bfseries}{\thesubsection}{1em}{}  % Adjust 14pt to your preferred size
+
+
+
+
+
+
+\begin{document}
+
+\title{{Network Layer Standards}}
+\author{{Jade Vaux (jv1g21, Team E1), Wai Wah Tang (wwt1u21, Team E2)  \\ \small ELEC3227 Embedded Networked Systems Coursework}}
+\date{} % clear date
+\maketitle
+%\nospaceafter{\maketitle}
+%% You can use nomenclature for Abbreviations if you like
+%\nomenclature{TC}{Turbo Coding}
+%\nomenclature{NOMA}{Non-Orthogonal Multiple Access}
+%\nomenclature{BPSK}{Binary Phase Shift Keying}
+%\printnomenclature
+
+
+\nospaceafter{\section{Protocols}}
+\label{sec:protocols}
+
+\subsection{Packet Bit Allocation:}
+ Figure \ref{BitAlloc} holistically displays the allocated functions for the available bytes in the network packet.
+ 
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.92\linewidth]{figures/BitAllocation.png}
+\caption{Bit Allocation.}
+\label{BitAlloc}
+\end{center}
+\end{figure}
+
+\nospaceafter{}
+\subsection{IP (Internet Protocol) Addressing System:}
+The IP address format is hierarchical and comprised of two parts: the network number, and the device number. The network number forms the three most significant bits of the address byte ranging from bits 001 to 111 as the network address 000 has been reserved for flooding purposes. The remaining five bits of the byte represent the device number on the network, providing a total of 244 addresses available (7 networks housing 32 hosts/routers each). \textit{N.B.}: devices on different networks may share the same device number. Figure \ref{AdFormat} displays an example of the addressing format.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=0.38\linewidth]{figures/AddressFormat.png}
+\caption{Address Format.}
+\label{AdFormat}
+\end{center}
+\end{figure}
+\nospaceafter{}
+
+\subsection{First Byte of Control:} 
+The first control byte in the packet will typically contain the IP address, as has been defined in the previous section, of the next hop. However, when the network is not involved in one-to-one transmission it may use this byte to depict a special operation (e.g. flooding data or broadcasting) occurring when all 8 bits have been set to 0.
+\subsection{Second Byte of Control}
+The second control byte is used for counting the hops for the flooding operation and the ARP. The first 4  most significant bits represent the operation type, while the remaining four lest significant bits are employed for flood control.\\
+\\
+\nospaceafter{Bits 1-4 (Operation Type):}
+\begin{itemize}
+%\setlength\itemsep{0pt} % Adjust this value to control the space
+\setlength\itemsep{0pt}
+  \setlength\parskip{0pt}
+  \setlength\parsep{0pt}
+  \item '0000': Normal one-to-one data transmission
+  \item ‘0001’: Flooding data
+  \item ‘0010’: Flood HELLO packet (For new device to the network)
+  \item ‘0011’: Regular ARP check
+  \item ‘0100’: Update ARP table
+  \item ‘0101’ to ‘1111’: Reserved for future use or other specific operation
+\end{itemize}
+\nospaceafter{Bits 5-8 (Flood Control):}
+\begin{itemize}
+  \setlength\itemsep{0pt}
+  \setlength\parskip{0pt}
+  \setlength\parsep{0pt}
+  \item ‘0000’: No Hop limit (Floods throughout the entire network/No limit)
+  \item ‘0001’: 1 hop limit
+  \item ‘0010’: 2 hop limit
+  \item … up to ‘0111’: 7 hop limit
+  \item ‘1000’ to ‘1111’: Reserved for future use
+\end{itemize}
+
+\nospaceafter{\section{Interface:}}
+\label{sec:interface}
+\nospaceafter{ARP:}
+\begin{itemize}
+  \setlength\itemsep{0pt}
+  \setlength\parskip{0pt}
+  \setlength\parsep{0pt}
+  \item Used to interface with the Data Link Layer.
+  \item Runs a check returning the IP and MAC addresses in a cache which may be used as a lookup table for DLL to assign the appropriate MAC address in their Addressing Field.
+  \item Notifies the DNS in the app layer if a device has left the network.
+\end{itemize}
+\nospaceafter{Application and Transport Layer:}
+\begin{itemize}
+  \setlength\itemsep{0pt}
+  \setlength\parskip{0pt}
+  \setlength\parsep{0pt}
+  \item The Application Layer’s DNS will send the IP address of the desired destination device directly to the Network Layer so that the Network Layer does not deal with host names.
+  \item Network layer provides routing service from source host to destination host for the application and transport layers.
+\end{itemize}
+
+\nospaceafter{\section{Error Detection:}}
+\nospaceafter{A 16-bit CRC will be used due to its simple, fast and advanced error detection capability. The parameters used are as follows:}
+\begin{itemize}
+  \setlength\itemsep{0pt}
+  \setlength\parskip{0pt}
+  \setlength\parsep{0pt}
+  \item Polynomial: ‘0x1021’ (CRC-16-CCITT), due to its good performance in detecting common error patterns, especially in noisy environments like radio communication.
+  \item Initial Value: ‘0xFFFF’ (All bits set to 1). This allows for immediate interaction error detection at the beginning of the data.
+  \item For simplicity the final XOR Value is ‘0x0000’ and the CRC value will not be modified after being calculated. Additionally, reflection at input or output for this same reason.
+\end{itemize}
+
+\end{document}
+
