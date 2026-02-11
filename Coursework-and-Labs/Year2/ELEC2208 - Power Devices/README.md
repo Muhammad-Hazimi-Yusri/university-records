@@ -89,43 +89,50 @@ The coursework involved designing a complete mechanical positioning system using
 ## Laboratory Work: BLDC Motor Control (EE75)
 
 ### Objective
-Develop embedded C firmware to control a Brushless DC (BLDC) motor using PWM techniques, implementing commutation logic and closed-loop speed control.
+This laboratory exercise (worth 5% of module marks) provides hands-on introduction to BLDC motor drive systems using a three-phase inverter/electronic commutator controlled by Hall sensor signals. Through guided experimental work, the lab demonstrates how to integrate power electronics with microcontroller-based control to operate a brushless DC motor.
 
 ### Implementation
 
-**Hardware Platform:** Microcontroller-based motor controller board
-**Programming Language:** C (embedded firmware)
+Following the lab manual instructions, the exercise involves:
+
+**Hardware Platform:** Il Matto microcontroller with experimental platform
+**Programming Language:** C (using AVRDUDE with C232HM patch)
 **Control Method:** Six-step commutation with Hall effect sensor feedback
+**Approach:** Step-by-step guided implementation building from PWM generation to full motor control
 
-### Firmware Components
+### Lab Exercise Components
 
-1. **PWM Generation Module** ([pwm.c](EE75/pwm.c))
-   - Configures timer peripherals for PWM output
-   - Implements duty cycle control for speed regulation
-   - Handles complementary PWM pairs for three-phase inverter bridge
+The laboratory work progresses through three main sections:
 
-2. **BLDC Commutation Logic** ([bldc.c](EE75/bldc.c))
-   - Reads Hall effect sensor inputs to determine rotor position
-   - Implements six-step commutation sequence
-   - Updates PWM outputs to drive the correct motor phases
-   - Handles direction control and motor startup
+1. **Three-Phase Voltage Source Inverter (Six Step Operation)**
+   - Program Il Matto to generate 6 PWM signals with specified frequency and dead-time
+   - Construct three-phase inverter using MOSFETs and gate drivers
+   - Verify correct operation with oscilloscope measurements
 
-3. **Debug and Utility Functions** ([debug.h](EE75/debug.h))
-   - Serial communication for debugging and monitoring
-   - Real-time parameter adjustment
-   - System status reporting
+2. **Rotor Position and Hall Sensor Analysis**
+   - Manually energize stator windings using bench power supply
+   - Observe and record Hall sensor signals (H1, H2, H3) at different rotor positions
+   - Construct commutation tables for clockwise and counter-clockwise rotation
 
-### Technical Challenges Addressed
+3. **BLDC Motor Control Implementation**
+   - Program Il Matto to read Hall sensor signals and generate appropriate PWM patterns
+   - Implement commutation logic based on experimentally derived tables
+   - Test motor operation and observe speed control through voltage adjustment
 
-- Proper timing of commutation events to avoid cogging and ensure smooth rotation
-- Minimizing switching losses in the inverter bridge
-- Implementing dead-time to prevent shoot-through in the H-bridge
-- Closed-loop speed regulation using feedback control
+**Code files** ([bldc.c](EE75/bldc.c), [pwm.c](EE75/pwm.c), [debug.h](EE75/debug.h)) contain the implemented firmware following lab manual specifications, with original reference code preserved in `original codes/` folder.
+
+### Key Concepts Explored
+
+- **Hall sensor operation** - Understanding open-collector Hall effect sensors and their relationship to rotor position
+- **Commutation sequences** - Six-step commutation patterns for BLDC motors in both rotation directions
+- **Dead-time implementation** - Preventing shoot-through in three-phase inverter bridges
+- **PWM control** - Generating appropriate gate drive signals for power MOSFETs
+- **Experimental validation** - Manually determining commutation tables through hands-on testing
 
 ### Laboratory Documentation
 
 - **Lab Prints** - Detailed lab reports documenting experimental setup, observations, and results
-- **Notes** - Theoretical background, calculations, and design decisions
+- **Notes** - Laboratory instruction manual and task specifications
 
 ## Technical Skills Demonstrated
 
@@ -175,8 +182,8 @@ This repository contains comprehensive materials for the ELEC2208 module:
 
 ### Practical Work
 - **CAD Design Files** - Complete mechanical design project with all component drawings and assemblies
-- **Embedded Firmware** - BLDC motor control code with original versions and modified implementations
-- **Lab Documentation** - Comprehensive lab reports and experimental notes
+- **Embedded Firmware** - BLDC motor control code implementing Il Matto programs for lab exercises
+- **Lab Documentation** - Lab reports, instruction manual, and experimental observations
 
 ## Folder Structure
 
@@ -214,7 +221,7 @@ ELEC2208 - Power Devices/
 │   │   ├── debug.h
 │   │   └── pwm.c
 │   ├── Lab Prints.docx                          # Laboratory report and documentation
-│   └── notes.pdf                                # Lab-specific notes and observations
+│   └── notes.pdf                                # Laboratory instruction manual
 │
 ├── Past Papers/                                 # Examination papers for revision
 │   ├── 201314/02/ELEC2208-201314-02-ELEC2208W1.pdf
